@@ -330,8 +330,10 @@ public abstract class VimTestCase extends UsefulTestCase {
         VimCoords vimCoords = api.getCurrentWindow().get().getCursor().get();
         VimCoords resultVimCoords = NeovimHelper.toVimCoords(editor.getCaretModel().getLogicalPosition());
 
+        // Check caret position
         assertTrue(NeovimHelper.equalsTo(vimCoords, resultVimCoords));
 
+        // Check content
         List<String> lines = api.getCurrentBuffer().get().getLines(0, -1, false).get();
         String neovimContent = String.join("\n", lines);
         assertEquals(neovimContent, myFixture.getEditor().getDocument().getText());
